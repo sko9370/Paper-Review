@@ -1,53 +1,61 @@
-## Paper Review 0
+## Paper Review 2
 
 - Reviewer: Sang Oh
-- Paper Title: An Analysis of China's "Great Cannon"
-- Author: Bill Marczak; Nicholas Weaver; Jakub Dalek; Roya Ensafi
+- Paper Title: Robust Signatures for Kernel Data Structures
+- Author: Brendan Dolan-Gavitt; Abhinav Srivastava; Patrick Traynor; Jonathon Giffin
 
 ### Did you like this paper?  Why?
-- Yes, the paper described the variety of information the researchers gained by using relatively simple tools.
-They didn't use complicated techniques, rather, they took the data they were able to get and were able to logically conclude very important pieces of information about China's Great Cannon.
-The paper also compares and contrasts the Great Cannon with the Great Firewall.
+Yes, this method is dynamic and could be extended to other data structures and possibly other OS's.
+Although there is a lot of setup involved with pinpointing robust kernel data structures, the process is well documented.
+There is even a pseudo-code snippet describing part of the process.
+Seeing exactly how features were being used in python helped to grasp what work was being done in the kernel.
+This outputs a plugin for Volatility, which applies to what we directly learned in lab.
 
 ### What problem is this paper solving?
-- This paper is solving the mystery of China's Great Cannon.
-Not much is known about this private government tool, especially its capabilities and functions.
-The authors are able to generally locate the system and describe its basic functions while differentiating it from the Great Firewall.
+This paper proposes a solution to detecting objects hidden by kernel-mode rootkits.
+Other tools use signatures from kernel data structures that are not reliable because the fields can be modified.
+This new tool dynamically creates signatures for kernel data structures that are able to create signatures that can find more hidden objects.
 
 ### What are the strengths of this paper?
-- The strengths of this paper are that it divides up each piece of information up into short digestible sections.
-There is good partitioning between topics, almost as if I didn't need to know about GreatFire.org's Logs to the history of the GC.
-There is also a variety of articles cited where the authors are able to come to conclusions using pieces of information gleaned from events or incidents in combination with the results of their tests with the Chinese network.
+The paper used a Windows VM to test the process.
+Windows is widely used so this demonstrated the practical use of this tool.
+The paper clearly identifies assumptions before any predictions or results are put forth.
+There was adequate discussion on issues with robust feature detection and any inefficiencies were well justified or accounted for with workarounds.
 
 ### What are the main weaknesses in the paper?
-- The main weakness of this paper is perhaps the exploration of the ethical aspect of China's Great Cannon and Firewall.
-I think the section about implications of China's control of the internet could have been expanded to include the people's opinions on what they think about the censorship and their internet traffic being rerouted.
-I also found the diagram comparing the GC and Great Firewall to be a bit confusing at first because the arrows from the main route of traffic implied that the rerouted traffic and tapped traffic were similar processes.
-Without having carefully understood the functions of the GC and GF, Figure 1 may have been a bit misleading.
+Parts of the paper are a bit repetitive.
+It repeats information and concepts like in 4. Architecture and 4.1 Data Structure Profiling.
+Quantitatively, this method yielded only a small improvement in performance from psscan2 and PTFinder
 
 ### Next Steps?
-- I would be curious to know of different ways people have tried to combat the GC so that their traffic wouldn't automatically be rerouted.
-Along the same line of thought, I would like to know how futureproof the GC is.
-Will the GC be outsmarted within 5 years? Exploited and used against the Chinese Government in 10 years?
-Similar (if any) cases of states using their power to manage internet traffic would be an interesting extension to the paper.
-They may not be as infamous as China's Great Wall or Cannon, but they may provide a greater perspective on the use of tools by states in attempting to control information.
-
+Further work should be done to streamline and speed up the process of coming up with signatures from robust features.
+The process should be generalized to other data structures on Windows and even Linux.
+More trials should be done with fuzzing for longer time periods to get better features.
 
 ## How to Read a Paper
 
 ### 1. Category
-- This paper is a explanation of the functionality and abilities of China's Great Cannon.
+This paper proposes a novel method of detecting objects hidden by rootkits.
 
 ### 2. Context
-- The paper begins with an explanation of the Great Firewall and begins to describe differences with the Great Cannon. This sets up basic knowledge and adds in details about what's unique to the GC.
+Virus detection has easily been thwarted by metamorphic viruses which have significantly increased the difficulty of discovery.
+However, the syntax of kernel data structures is controlled by the code of the OS.
+Generating signatures based on these data structures is more robust because they cannot be changed by the attacker.
+Pieces of this tool have been used in similar fashion by other tools.
+Dynamic analysis of profile field usage in bbcache.
+Fuzzing in Solar Eclipse.
+Data structure invariants in Gibraltar.
 
 ### 3. Correctness
-- Much of the information cannot be officially verified because of the nature of the research.
-However, the authors seemed to use good logical flow in their presentation of theories and ideas with evidence.
+I was convinced by the way features were chosen based on profiling and fuzzing.
+The logic was sound on why certain features were more robust than others.
+The process for picking out specific features is inherently difficult, but the paper addressed assumptions and justified when profiling or fuzzing failed.
 
 ### 4. Contributions
-- The paper contributed to a greater understanding of the capabilities of China's Great Cannon against web servers that go against the political will of its government.
+The paper introduced a systematic way of choosing robust features that can be used to search hidden objects that evade other process scanners.
+The tool also outputs a Volatility plugin which makes it readily usable as a prototype for people who want to developing the tool further for different data structures or OS's.
 
 ### 5. Clarity
-- The paper is well written.
-There is no fluff and each section gets to the point of what it's trying to explain with adequate context, detailed description of the steps taken, and an analysis of the results.
+The headings and accurate subheadings correlated closely with the content, which stayed relevant and on-topic.
+I rarely found myself wondering what the paragraph was about.
+Logical ordering and organization into distinct parts makes each part easier to understand.
